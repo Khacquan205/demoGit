@@ -1,0 +1,4 @@
+# File này giúp ta chặn file mà mình muốn
+# Comment
+node_modules/
+.logs
