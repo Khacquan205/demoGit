@@ -1,9 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body></body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dark Mode Demo</title>
+    <style>
+        body {
+            background-color: #ffffff;
+            color: #333333;
+            font-family: sans-serif;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        body.dark-mode {
+            background-color: #333333;
+            color: #ffffff;
+        }
+
+        #theme-toggle {
+            padding: 10px 15px;
+            border: 1px solid #cccccc;
+            cursor: pointer;
+            background-color: #f0f0f0;
+            color: #333333;
+        }
+
+        body.dark-mode #theme-toggle {
+            background-color: #555555;
+            color: #ffffff;
+            border-color: #777777;
+        }
+    </style>
+</head>
+<body>
+    <button id="theme-toggle">Toggle Dark Mode</button>
+    <h1 id="page-title">Light Mode</h1>
+    <p>This is some sample content to demonstrate the theme change.</p>
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        const body = document.body;
+        const pageTitle = document.getElementById('page-title');
+
+        function applyTheme(isDark) {
+            if (isDark) {
+                body.classList.add('dark-mode');
+                pageTitle.textContent = 'Dark Mode';
+            } else {
+                body.classList.remove('dark-mode');
+                pageTitle.textContent = 'Light Mode';
+            }
+        }
+
+        themeToggle.addEventListener('click', () => {
+            const isDarkModeNow = body.classList.toggle('dark-mode');
+            applyTheme(isDarkModeNow);
+            localStorage.setItem('theme', isDarkModeNow ? 'dark' : 'light');
+        });
+
+        // Load saved theme on page load
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            applyTheme(savedTheme === 'dark');
+        }
+    </script>
+</body>
 </html>
